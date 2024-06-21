@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import timedelta
 from config import SECRET_KEY, DB_NAME, DB_USER, DB_PASSWORD
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,6 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'django_filters'
 
     'jobs',
     'user',
@@ -53,18 +55,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,  # Имя вашей базы данных
-        'USER': DB_USER,      # Имя вашего пользователя
-        'PASSWORD': DB_PASSWORD,  # Ваш пароль
-        'HOST': 'localhost',   # Хост, на котором работает PostgreSQL
-        'PORT': '5432',            # Порт (по умолчанию 5432)
+        'NAME': DB_NAME,  # your DB_NAME
+        'USER': DB_USER,  # your DB_USER
+        'PASSWORD': DB_PASSWORD,  # your DB_PASSWORD
+        'HOST': 'localhost',  # host
+        'PORT': '5432',  # port (by default 5432)
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -83,7 +83,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'user.User'
 
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -92,8 +91,30 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 STATIC_URL = 'static/'
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings for Access and Refresh Tokens
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # how long access tokens are valid
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),  # how long sliding tokens are valid to be refreshed
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=7),  # how long sliding tokens are valid to prove authentication
+    'SLIDING_TOKEN_REFRESH_REUSE_ALLOWS_REFRESH': False,
+    'SLIDING_TOKEN_REFRESH_REUSE_RESETS': True,
+    'ROTATE_REFRESH_TOKENS': False,
+    'ALGORITHM': 'HS256',
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    # the authorization header type(s) that will be accepted for views that require authentication
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+}
+
+# DRF settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+}
