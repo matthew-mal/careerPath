@@ -10,8 +10,8 @@ parameters_for_null = {
 
 
 class UserType(models.IntegerChoices):
-    employers = 1, "Компания"
-    job_seeker = 2, "Соискатель"
+    EMPLOYER = 1, "Компания"
+    JOB_SEEKER = 2, "Соискатель"
 
 
 class MyUserManager(BaseUserManager):
@@ -41,7 +41,7 @@ class MyUserManager(BaseUserManager):
 class User(AbstractBaseUser):
     user_type = models.PositiveSmallIntegerField(
         choices=UserType.choices,
-        default=UserType.job_seeker,
+        default=UserType.JOB_SEEKER,
         verbose_name="Тип пользователя"
     )
     username = models.CharField(
@@ -56,11 +56,6 @@ class User(AbstractBaseUser):
         unique=True,
         verbose_name="Номер телефона"
     )
-    # cover = models.ImageField(
-    #     upload_to="media/cover",
-    #     verbose_name="Ваше фото",
-    #     **parametersForNull
-    # )
     created_date = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Дата создания"
