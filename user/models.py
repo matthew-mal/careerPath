@@ -1,6 +1,13 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
+from jobs.choices import IndustryCh, SpecialityCh
+
+parameters_for_null = {
+    'null': True,
+    'blank': True,
+}
+
 
 class UserType(models.IntegerChoices):
     employers = 1, "Компания"
@@ -102,3 +109,51 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+
+class Employer(User):
+    company_name = models.CharField(
+        verbose_name="Название компании",
+        max_length=255
+    )
+    industry = models.CharField(
+        max_length=250,
+        verbose_name='Название отрасли',
+        choices=IndustryCh,
+        **parameters_for_null
+    )
+    other_industry = models.CharField(
+        max_length=250,
+        verbose_name='Название отрасли(другое)',
+        **parameters_for_null
+    )
+    country = models.CharField(
+        verbose_name="Страна",
+        max_length=255
+    )
+    city = models.CharField(
+        verbose_name="Город",
+        max_length=255
+    )
+
+    class Meta:
+        verbose_name = "Компания"
+        verbose_name_plural = "Компании"
+
+
+class JobSeeker(User):
+    speciality = models.CharField(
+        choices=SpecialityCh,
+        verbose_name="Укажите свою специальность ",
+        max_length=255,
+        **parameters_for_null
+    )
+    other_speciality = models.CharField(
+        verbose_name="Укажите свою специальность(другое) ",
+        max_length=255,
+        **parameters_for_null
+    )
+
+    class Meta:
+        verbose_name = "Соискатель"
+        verbose_name_plural = "Соискатели"

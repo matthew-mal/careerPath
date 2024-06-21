@@ -5,7 +5,7 @@ from .choices import IndustryCh, CategoryCh, SpecialityCh, ExperienceCh
 
 User = get_user_model()
 
-parametersForNull = {
+parameters_for_null = {
     'null': True,
     'blank': True,
 }
@@ -17,12 +17,12 @@ class Industry(models.Model):
         verbose_name='Отрасль',
         choices=IndustryCh,
         default=None,
-        **parametersForNull
+        **parameters_for_null
     )
     other_title = models.CharField(
         max_length=250,
         verbose_name='Отрасль(другое)',
-        **parametersForNull
+        **parameters_for_null
     )
 
     def __str__(self):
@@ -39,12 +39,12 @@ class Category(models.Model):
         verbose_name='Категория',
         choices=CategoryCh,
         default=None,
-        **parametersForNull
+        **parameters_for_null
     )
     other_title = models.CharField(
         max_length=250,
         verbose_name='Категория(другое)',
-        **parametersForNull
+        **parameters_for_null
     )
 
     def __str__(self):
@@ -61,12 +61,12 @@ class Speciality(models.Model):
         verbose_name='Специализация',
         choices=SpecialityCh,
         default=None,
-        **parametersForNull
+        **parameters_for_null
     )
     other_title = models.CharField(
         max_length=250,
         verbose_name='Специализация(другое)',
-        **parametersForNull
+        **parameters_for_null
     )
 
     def __str__(self):
@@ -83,12 +83,12 @@ class Experience(models.Model):
         verbose_name='Опыт',
         choices=ExperienceCh,
         default=None,
-        **parametersForNull
+        **parameters_for_null
     )
     other_title = models.CharField(
         max_length=250,
         verbose_name='Опыт(другое)',
-        **parametersForNull
+        **parameters_for_null
     )
 
     def __str__(self):
