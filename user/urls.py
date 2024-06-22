@@ -7,6 +7,8 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 
+app_name = 'users'
+
 router = DefaultRouter()
 router.register(r'employers', EmployerViewSet)
 router.register(r'job_seekers', JobSeekerViewSet)
