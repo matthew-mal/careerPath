@@ -1,127 +1,127 @@
 IndustryCh = [
     [
-        "Веб-разработка",
-        "Веб-разработка"
+        "Web Development",
+        "Web Development"
     ],
     [
-        "Мобильная разработка",
-        "Мобильная разработка"
+        "Mobile Development",
+        "Mobile Development"
     ],
     [
-        "Базы данных",
-        "Базы данных"
+        "Database Management",
+        "Database Management"
     ],
     [
-        "Кибербезопасность",
-        "Кибербезопасность"
+        "Cybersecurity",
+        "Cybersecurity"
     ],
     [
-        "Искусственный интеллект и машинное обучение",
-        "Искусственный интеллект и машинное обучение"
+        "Artificial Intelligence and Machine Learning",
+        "Artificial Intelligence and Machine Learning"
     ],
     [
-        "Сетевые технологии",
-        "Сетевые технологии"
+        "Networking Technologies",
+        "Networking Technologies"
     ],
     [
-        "IT-консалтинг",
-        "IT-консалтинг"
+        "IT Consulting",
+        "IT Consulting"
     ]
 ]
 
 CategoryCh = [
     [
-        "Бэкенд - разработка",
-        "Бэкенд - разработка"
+        "Backend Development",
+        "Backend Development"
     ],
     [
-        "Фронтенд-разработка",
-        "Фронтенд-разработка"
+        "Frontend Development",
+        "Frontend Development"
     ],
     [
-        "Дизайн",
-        "Дизайн"
+        "Design",
+        "Design"
     ],
     [
-        "Тестирование и QA ",
-        "Тестирование и QA "
+        "Testing and QA",
+        "Testing and QA"
     ],
     [
-        "Администрирование и DevOps",
-        "Администрирование и DevOps"
+        "Administration and DevOps",
+        "Administration and DevOps"
     ],
     [
-        "Управление проектами",
-        "Управление проектами"
+        "Project Management",
+        "Project Management"
     ],
     [
-        "Аналитика и анализ данных",
-        "Аналитика и анализ данных",
+        "Analytics and Data Analysis",
+        "Analytics and Data Analysis",
     ]
 ]
 
 SpecialityCh = [
     [
-        "Python-разработчик",
-        "Python-разработчик",
+        "Python Developer",
+        "Python Developer",
     ],
     [
-        "JavaScript-разработчик",
-        "JavaScript-разработчик",
+        "JavaScript Developer",
+        "JavaScript Developer",
     ],
     [
-        "Android-разработчик",
-        "Android-разработчик",
+        "Android Developer",
+        "Android Developer",
     ],
     [
-        "iOS-разработчик",
-        "iOS-разработчик",
+        "iOS Developer",
+        "iOS Developer",
     ],
     [
-        "Специалист по базам данных (DBA)",
-        "Специалист по базам данных (DBA)",
+        "Database Administrator (DBA)",
+        "Database Administrator (DBA)",
     ],
     [
-        "Исследователь данных",
-        "Исследователь данных",
+        "Data Scientist",
+        "Data Scientist",
     ],
     [
-        "Специалист по безопасности информации (InfoSec)",
-        "Специалист по безопасности информации (InfoSec)",
+        "Information Security Specialist (InfoSec)",
+        "Information Security Specialist (InfoSec)",
     ],
     [
-        "IT-консультант",
-        "IT-консультант"
+        "IT Consultant",
+        "IT Consultant"
     ],
     [
-        "Системный администратор",
-        "Системный администратор"
+        "System Administrator",
+        "System Administrator"
     ]
 ]
 
 ExperienceCh = [
     [
-        "Стажер (Intern)",
-        "Стажер (Intern)"
+        "Intern",
+        "Intern"
     ],
     [
-        "Джуниор (Junior)",
-        "Джуниор (Junior)"
+        "Junior",
+        "Junior"
     ],
     [
-        "Мидл (Middle)",
-        "Мидл (Middle)"
+        "Middle",
+        "Middle"
     ],
     [
-        "Синьор (Senior)",
-        "Синьор (Senior)"
+        "Senior",
+        "Senior"
     ],
     [
-        "Ведущий (Lead)",
-        "Ведущий (Lead)"
+        "Lead",
+        "Lead"
     ],
     [
-        "Эксперт (Expert)",
-        "Эксперт (Expert)"
+        "Expert",
+        "Expert"
     ],
 ]
