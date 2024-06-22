@@ -1,38 +1,37 @@
-from rest_framework import generics, filters
-from .models import Vacancy, Chosen
-from user.models import UserType
-from .serializers import (
-    VacancyListSerializer,
-    ResponseSerializer, VacancyCreateSerializer,
-    ChosenSerializer
-)
-
+from rest_framework import viewsets
+from .serializers import VacancyListSerializer, VacancyCreateSerializer, ResponseSerializer, ChosenSerializer
 from rest_framework.exceptions import PermissionDenied
-from .paginations import VacancyPagination
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
+
+from .models import Vacancy, Chosen, Response
+from user.models import UserType
+
+from .paginations import VacancyPagination
+
 from .filters import VacancyFilter
 
 
-class VacancyListView(generics.ListAPIView):
+class VacancyViewSet(viewsets.ModelViewSet):
     """
-    API view to retrieve a paginated list of vacancies with filtering,
-    search, and ordering capabilities.
+    API viewset to handle listing, retrieving, creating, updating,
+    and deleting vacancies with filtering, search, and ordering capabilities.
     """
     queryset = Vacancy.objects.all()
     serializer_class = VacancyListSerializer
     pagination_class = VacancyPagination
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = VacancyFilter
-    search_fields = ['category__title']
-    ordering_fields = ['salary']
+    search_fields = ['category__title', 'speciality__title', 'industry__title']
+    ordering_fields = ['salary', 'published_date']
 
-
-class VacancyCreateView(generics.CreateAPIView):
-    """
-    API view to allow employers to create a new vacancy. Only users with
-    an employer user type can create a vacancy.
-    """
-    serializer_class = VacancyCreateSerializer
+    def get_serializer_class(self):
+        """
+        Return the appropriate serializer class based on the action.
+        """
+        if self.action == 'create':
+            return VacancyCreateSerializer
+        return VacancyListSerializer
 
     def perform_create(self, serializer):
         """
@@ -45,16 +44,17 @@ class VacancyCreateView(generics.CreateAPIView):
             raise PermissionDenied("Only employers can create vacancies")
 
 
-class ResponseCreateView(generics.CreateAPIView):
+class ResponseViewSet(viewsets.ModelViewSet):
     """
-    API view to allow job seekers to respond to a vacancy. Only users with
-    a job seeker user type can create a response.
+    API viewset to handle listing, retrieving, creating, updating,
+    and deleting responses to vacancies.
     """
+    queryset = Response.objects.all()
     serializer_class = ResponseSerializer
 
     def perform_create(self, serializer):
         """
-        Save the new response if the requesting user is an authenticated job seeker.
+        Save the response if the requesting user is an authenticated job seeker.
         """
         user = self.request.user
         if user.is_authenticated and user.user_type == UserType.JOB_SEEKER:
@@ -63,16 +63,16 @@ class ResponseCreateView(generics.CreateAPIView):
             raise PermissionDenied("Only job seekers can respond to vacancies")
 
 
-class ChosenListCreateView(generics.ListCreateAPIView):
+class ChosenViewSet(viewsets.ModelViewSet):
     """
-    API view to retrieve the list of chosen vacancies for the authenticated user
-    and allow them to add a new vacancy to their chosen list.
+    API viewset to handle listing, retrieving, creating, updating,
+    and deleting chosen vacancies by users.
     """
     serializer_class = ChosenSerializer
 
     def get_queryset(self):
         """
-        Retrieve the queryset of chosen vacancies for the authenticated user.
+        Return the chosen vacancies for the requesting user.
         """
         user = self.request.user
         if not user.is_authenticated:
@@ -81,7 +81,7 @@ class ChosenListCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         """
-        Save a new chosen vacancy for the authenticated user.
+        Save the chosen vacancy for the requesting user.
         """
         user = self.request.user
         if user.is_authenticated:
