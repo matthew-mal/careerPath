@@ -9,7 +9,7 @@ class EmployerListCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employer
-        fields = ['company_name', 'industry', 'other_industry', 'country', 'city', 'password']
+        fields = ['id', 'company_name', 'industry', 'other_industry', 'country', 'city', 'password']
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -58,7 +58,7 @@ class JobSeekerListCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = JobSeeker
-        fields = ['speciality', 'other_speciality', 'password']
+        fields = ['id', 'speciality', 'other_speciality', 'password']
         extra_kwargs = {
             'password': {'write_only': True}
         }
