@@ -59,18 +59,10 @@ class JobSeekerViewSetTests(APITestCase):
     def test_update_profile(self):
         url = '/api/1/users/job_seekers/profile/'
         new_speciality = 'Python Developer'
-        data = {'new_speciality': new_speciality}
-
-        # Make the PATCH request
+        data = {'speciality': new_speciality}
         response = self.client.patch(url, data, format='json')
-
-        # Check if the update was successful (status code 200)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-        # Refresh job_seeker instance from the database
         self.job_seeker.refresh_from_db()
-
-        # Assert that the specialty has been updated correctly
         self.assertEqual(self.job_seeker.speciality, new_speciality)
 
     def test_update_profile_invalid_data(self):
