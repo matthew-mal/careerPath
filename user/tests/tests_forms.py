@@ -30,9 +30,10 @@ class EmployerCreationFormTest(TestCase):
         self.assertIn('username', form.errors)
 
     def test_employer_creation_form_existing_email(self):
-        existing_user = Employer.objects.create_user(phone_number='1234567890',username='existinguser', email='employer1@example.com')
+        existing_user = Employer.objects.create_user(phone_number='1234567890', username='existinguser',
+                                                     email='employer1@example.com')
         form_data = {
-            'phone_number': '1234567890', # phone_number already exists
+            'phone_number': '1234567890',  # phone_number already exists
             'username': 'employeruser',
             'email': 'employer@example.com',
             'is_active': True,
@@ -46,7 +47,8 @@ class EmployerCreationFormTest(TestCase):
 
 class EmployerChangeFormTest(TestCase):
     def test_employer_change_form_valid(self):
-        employer = Employer.objects.create_user(phone_number='111', username='employeruser', email='employer@example.com')
+        employer = Employer.objects.create_user(phone_number='111', username='employeruser',
+                                                email='employer@example.com')
         form_data = {
             'password': employer.password,
             'is_admin': False,
@@ -85,7 +87,8 @@ class JobSeekerCreationFormTest(TestCase):
 
 class JobSeekerChangeFormTest(TestCase):
     def test_jobseeker_change_form_valid(self):
-        jobseeker = JobSeeker.objects.create_user(phone_number='111',username='jobseekeruser', email='jobseeker@example.com')
+        jobseeker = JobSeeker.objects.create_user(phone_number='111', username='jobseekeruser',
+                                                  email='jobseeker@example.com')
         form_data = {
             'password': jobseeker.password,
             'is_admin': False,
