@@ -10,8 +10,8 @@ from rest_framework_simplejwt.views import (
 app_name = 'users'
 
 router = DefaultRouter()
-router.register(r'employers', EmployerViewSet)
-router.register(r'job_seekers', JobSeekerViewSet)
+router.register(r'employers', EmployerViewSet, basename='employers')
+router.register(r'job_seekers', JobSeekerViewSet, basename='job_seekers')
 
 urlpatterns = [
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
